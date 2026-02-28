@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://j1pr1vtjl6n"
-path="res://.godot/imported/icon (2).svg-39a27d720e46a0ca7827609d30b9ce14.ctex"
+uid="uid://cjb7utpl86x8u"
+path="res://.godot/imported/MenuBackground.png-95cb835947491b1e124f3d24332ab3d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icon (2).svg"
-dest_files=["res://.godot/imported/icon (2).svg-39a27d720e46a0ca7827609d30b9ce14.ctex"]
+source_file="res://UIElements/MenuBackground.png"
+dest_files=["res://.godot/imported/MenuBackground.png-95cb835947491b1e124f3d24332ab3d7.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
