@@ -5,7 +5,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7dr5w"]
 
-[node name="Control" type="Control" unique_id=2049346223]
+[node name="practiceControl" type="Control" unique_id=2049346223]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
