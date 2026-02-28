@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://dr14le4dofaa0"]
+
+[ext_resource type="Script" uid="uid://bsdbi3wghpfxt" path="res://TheGame/UIElements/skill_bar.gd" id="1_s70p2"]
+
+[sub_resource type="GDScript" id="GDScript_s70p2"]
+script/source = "extends ProgressBar
+
+const MAX_HEALTH: int = 100
+var health: int = 10
+
+func _ready():
+	self.max_value = MAX_HEALTH
+	set_health_bar()
+	
+func _input(event: InputEvent) -> void: # replace this with actual health stuff
+	if event.is_action_pressed(\"ui_down\"):
+		damage()
+		
+func damage(): # replace this once health is finalized
+	health -= 1
+	if health < 0:	
+		health = MAX_HEALTH
+	set_health_bar()
+
+func set_health_bar():
+	self.value = health
+"
+
+[node name="mainControl" type="Control" unique_id=914664440]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="healthAndSkillBar" type="VBoxContainer" parent="." unique_id=990764840]
+layout_mode = 0
+offset_right = 505.0
+offset_bottom = 469.0
+
+[node name="healthBar" type="ProgressBar" parent="healthAndSkillBar" unique_id=1334462937]
+self_modulate = Color(0.38039216, 1, 1, 0.6666667)
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+show_percentage = false
+script = SubResource("GDScript_s70p2")
+
+[node name="skillBar" type="ProgressBar" parent="healthAndSkillBar" unique_id=319531320]
+self_modulate = Color(0.9235445, 0, 0.12920523, 0.6666667)
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+show_percentage = false
+script = ExtResource("1_s70p2")
