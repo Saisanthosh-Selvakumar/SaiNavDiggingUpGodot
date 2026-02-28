@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://5ktyj3ny0eiu"]
 
-[ext_resource type="Texture2D" uid="uid://cjb7utpl86x8u" path="res://UIElements/MenuBackground.png" id="1_7dr5w"]
-[ext_resource type="Script" uid="uid://q3f66utkjmxc" path="res://UIElements/colour_menu.gd" id="2_eg6ca"]
+[ext_resource type="Texture2D" uid="uid://cjb7utpl86x8u" path="res://TheGame/UIElements/MenuBackground.png" id="1_7dr5w"]
+[ext_resource type="Script" uid="uid://q3f66utkjmxc" path="res://TheGame/UIElements/colour_menu.gd" id="2_eg6ca"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7dr5w"]
 

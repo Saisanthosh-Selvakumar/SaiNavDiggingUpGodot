@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dr14le4dofaa0"]
 
-[ext_resource type="Script" uid="uid://bsdbi3wghpfxt" path="res://UIElements/skill_bar.gd" id="1_s70p2"]
+[ext_resource type="Script" uid="uid://bsdbi3wghpfxt" path="res://TheGame/UIElements/skill_bar.gd" id="1_s70p2"]
 
 [sub_resource type="GDScript" id="GDScript_s70p2"]
 script/source = "extends ProgressBar
