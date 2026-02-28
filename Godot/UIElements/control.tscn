@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://5ktyj3ny0eiu"]
+
+[ext_resource type="Texture2D" uid="uid://cjb7utpl86x8u" path="res://UIElements/MenuBackground.png" id="1_7dr5w"]
+
+[node name="Control" type="Control" unique_id=2049346223]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1838892128]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.11372549, 1, 1, 1)
+
+[node name="ColourMenu" type="NinePatchRect" parent="." unique_id=2050209497]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.5
+offset_top = -118.75
+offset_right = 72.5
+offset_bottom = 118.75
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_7dr5w")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColourMenu" unique_id=872446983]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CheckButton1" type="CheckButton" parent="ColourMenu/VBoxContainer" unique_id=1571648286]
+self_modulate = Color(0.27460787, 2.055, 2.055, 1)
+layout_mode = 2
+text = "Colour #1"
