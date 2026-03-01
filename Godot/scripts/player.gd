@@ -1,30 +1,91 @@
 extends CharacterBody2D
 
-const SPEED = 200.0
-const JUMP_VELOCITY = -350.0
+# --- Constants ---
+const SPEED = 200.0 
+const ACCELERATION = 1200.0 
+const FRICTION = 1000.0 
+const JUMP_VELOCITY = -300.0 
 
-func _physics_process(delta: float):
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+# Gravity Variants
+const GRAVITY = 600.0 
+const FALL_GRAVITY = 800.0 
+const FAST_FALL_GRAVITY = 1000.0 
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_up") and is_on_floor():
+# Juice & Feel
+const INPUT_BUFFER_PATIENCE = 0.1 
+const COYOTE_TIME = 0.08
+
+# --- Variables ---
+var input_buffer : Timer 
+var coyote_timer : Timer 
+var coyote_jump_available := true
+
+func _ready() -> void:
+	# 1. Set up Input Buffer (allows pressing jump slightly before hitting ground)
+	input_buffer = Timer.new()
+	input_buffer.wait_time = INPUT_BUFFER_PATIENCE
+	input_buffer.one_shot = true
+	add_child(input_buffer)
+
+	# 2. Set up Coyote Timer (allows jumping slightly after leaving a ledge)
+	coyote_timer = Timer.new()
+	coyote_timer.wait_time = COYOTE_TIME
+	coyote_timer.one_shot = true
+	add_child(coyote_timer)
+	
+	# Using a Lambda to reset jump availability when timer runs out
+	coyote_timer.timeout.connect(func(): coyote_jump_available = false)
+
+func _physics_process(delta: float) -> void:
+	# --- 1. Inputs ---
+	var horizontal_input := Input.get_axis("move_left", "move_right")
+	var jump_attempted := Input.is_action_just_pressed("jump")
+	var jump_released := Input.is_action_just_released("jump")
+
+	# --- 2. Jump Logic ---
+	if jump_attempted:
+		input_buffer.start()
+
+	# Execute jump if buffer is active and we are "on the ground" (via coyote)
+	if input_buffer.time_left > 0 and coyote_jump_available:
 		velocity.y = JUMP_VELOCITY
+		coyote_jump_available = false
+		input_buffer.stop()
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * SPEED
+	# Variable Jump Height: If player lets go early, cut the upward momentum
+	if jump_released and velocity.y < 0:
+		velocity.y = max(velocity.y, JUMP_VELOCITY / 4)
+
+	# --- 3. Gravity & State Management ---
+	if is_on_floor():
+		coyote_jump_available = true
+		coyote_timer.stop()
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		# Start coyote timer the moment we fall off a ledge
+		if coyote_jump_available and coyote_timer.is_stopped():
+			coyote_timer.start()
+		
+		# Apply our custom gravity magnitude
+		velocity.y += get_gravity_magnitude() * delta
 
+	# --- 4. Horizontal Movement ---
+	var dash_multiplier := 2.0 if Input.is_action_pressed("dash") else 1.0
+	var target_speed = horizontal_input * SPEED * dash_multiplier
+	
+	if horizontal_input:
+		# Accelerate toward max speed
+		velocity.x = move_toward(velocity.x, target_speed, ACCELERATION * delta)
+	else:
+		# Friction brings us to a stop
+		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
+
+	# --- 5. Apply Movement ---
 	move_and_slide()
 
-func on_vignettearea_body_entered(body: Node2D) -> void:
-	if body == self:
-		ColorRect.visible = true
-		print("Vignette visible")
-		ColorRect.modulate.a = 0.0
-		create_tween().tween_property(ColorRect, "modulate:a", 10, 0.5)
+## Renamed from get_gravity() to avoid conflict with Godot 4.3+ built-in function
+func get_gravity_magnitude() -> float:
+	if Input.is_action_pressed("fast_fall"):
+		return FAST_FALL_GRAVITY
+	
+	# Return higher gravity when falling for a "snappier" feel
+	return GRAVITY if velocity.y < 0 else FALL_GRAVITY
