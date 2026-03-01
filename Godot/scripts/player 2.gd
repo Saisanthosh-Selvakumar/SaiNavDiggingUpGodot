@@ -43,7 +43,7 @@ func _process(delta):
 
 	# Update HUD
 	var hud = get_tree().get_first_node_in_group("hud")
-	var hp_bar = get_node_or_null("/root/BossFight/HUD/HPBar")
+	var hp_bar = get_node_or_null("/root/BossFight/HUD/PBox/HPBar")
 	if hp_bar:
 		hp_bar.value = (hp / MAX_HP) * 100.0
 

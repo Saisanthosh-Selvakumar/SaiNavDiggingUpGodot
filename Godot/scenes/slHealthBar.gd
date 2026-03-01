@@ -7,7 +7,7 @@ func _ready():
 	set_bar()
 	
 func _input(event: InputEvent) -> void: # replace this with actual health stuff
-	if event.is_action_pressed("ui_up"):
+	if event.is_action_pressed("jump"):
 		damage()
 		
 func damage(): # replace this once skill reduction for super moves is complete

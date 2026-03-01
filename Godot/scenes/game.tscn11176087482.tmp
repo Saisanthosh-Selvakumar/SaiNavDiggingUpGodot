@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://gye6c2xifcwy" path="res://temporaryAssetsSai/UI3.png" id="10_dinhu"]
 [ext_resource type="Script" uid="uid://c60ntngj54jn6" path="res://scenes/slHealthBar.gd" id="11_kvpfn"]
 [ext_resource type="Script" uid="uid://barmkygmac7uo" path="res://scenes/area_2d.gd" id="11_kvuet"]
-[ext_resource type="Script" uid="uid://7xxevrgxngpb" path="res://scripts/FinalBossTrigger.gd" id="14_ir15t"]
+[ext_resource type="Script" path="res://scripts/FinalBossTrigger.gd" id="14_ir15t"]
 [ext_resource type="Script" path="res://scripts/EscapeZone.gd" id="15_ca42v"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yqjtg"]

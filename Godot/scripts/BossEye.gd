@@ -85,7 +85,7 @@ func _process(delta):
 	_update_attacks(delta, player)
 
 	# Update HP bar
-	var boss_hp_bar = get_node_or_null("/root/BossFight/HUD/BossHPBar")
+	var boss_hp_bar = get_node_or_null("/root/BossFight/HUD/BossBox/BossHP")
 	if boss_hp_bar:
 		boss_hp_bar.value = (hp / MAX_HP) * 100.0
 
