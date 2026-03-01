@@ -1,5 +1,5 @@
-extends Area2D
+extends Node2D
 
-func _on_body_entered(body):
-	Global.damage(10)
-	print("Player hit! Health reduced.")
+func _on_body_entered(body: Node2D) -> void:
+	if body is CharacterBody2D:
+		get_tree().change_scene_to_file("res://scenes/BossFight.tscn")

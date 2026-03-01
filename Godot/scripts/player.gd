@@ -87,7 +87,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	if is_on_floor() and last_y_velocity > FALL_THRESHOLD:
-		var impact = pow(abs(last_y_velocity), (1/25))
+		var impact = sqrt(abs(last_y_velocity))
 		Global.damage(impact)
 
 ## Renamed from get_gravity() to avoid conflict with Godot 4.3+ built-in function

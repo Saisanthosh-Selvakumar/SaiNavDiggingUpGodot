@@ -5,12 +5,10 @@ extends CharacterBody2D
 # WASD/Arrow keys to move, Left click or Space to shoot.
 
 const SPEED := 280.0
-const BULLET_SPEED := 600.0
 const MAX_HP := 100.0
 const FIRE_COOLDOWN := 0.25
-const EYE_RADIUS := 14.0
-const PUPIL_RADIUS := 5.0
 
+var bullet_speed: int = 600.0 * Global.multiplier
 var hp := MAX_HP
 var fire_timer := 0.0
 var look_dir := Vector2.UP
@@ -75,7 +73,7 @@ func _shoot():
 	var bullet = _create_bullet()
 	get_tree().root.get_node("BossFight").add_child(bullet)
 	bullet.global_position = global_position
-	bullet.setup(look_dir * BULLET_SPEED, "player_bullet")
+	bullet.setup(look_dir * bullet_speed, "player_bullet")
 
 func _create_bullet() -> Node2D:
 	var b = preload("res://scripts/Bullet.gd").new()
