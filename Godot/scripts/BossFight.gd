@@ -13,12 +13,12 @@ func _process(_delta):
 
 func player_died():
 	game_over = true
-	_show_end_screen("YOU DIED\n\nThe eye sees all...")
+	_show_end_screen("MARCH DIED\nmay the Commander never see\nthe light of day.\nYou are dishonorably discharged.\nBye.")
 
 func boss_defeated():
 	game_over = true
 	player_won = true
-	_show_end_screen("YOU WIN\n\nThe eye is closed forever.")
+	_show_end_screen("Commander March succumbs to...\nhallucinations.\nYour poor job in treating March\nWILL reflect on your record, Private.")
 
 func _show_end_screen(text: String):
 	var label = $HUD/GameOverLabel
