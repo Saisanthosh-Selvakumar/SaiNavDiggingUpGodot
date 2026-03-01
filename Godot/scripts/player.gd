@@ -5,6 +5,7 @@ const SPEED = 200.0
 const ACCELERATION = 1200.0 
 const FRICTION = 1000.0 
 const JUMP_VELOCITY = -300.0 
+const FALL_THRESHOLD = 100000000
 
 # Gravity Variants
 const GRAVITY = 600.0 
@@ -16,9 +17,10 @@ const INPUT_BUFFER_PATIENCE = 0.1
 const COYOTE_TIME = 0.08
 
 # --- Variables ---
-var input_buffer : Timer 
-var coyote_timer : Timer 
+var input_buffer: Timer 
+var coyote_timer: Timer 
 var coyote_jump_available := true
+var last_y_velocity = 0.0
 
 func _ready() -> void:
 	# 1. Set up Input Buffer (allows pressing jump slightly before hitting ground)
@@ -79,8 +81,14 @@ func _physics_process(delta: float) -> void:
 		# Friction brings us to a stop
 		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 
+	last_y_velocity = velocity.y
+	
 	# --- 5. Apply Movement ---
 	move_and_slide()
+	
+	if is_on_floor() and last_y_velocity < FALL_THRESHOLD:
+		#var impact = 10 #abs(last_y_velocity)
+		Global.damage(10)
 
 ## Renamed from get_gravity() to avoid conflict with Godot 4.3+ built-in function
 func get_gravity_magnitude() -> float:

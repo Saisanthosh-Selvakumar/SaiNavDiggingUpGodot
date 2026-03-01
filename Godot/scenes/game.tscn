@@ -1,12 +1,15 @@
 [gd_scene format=4 uid="uid://dkc3bngngt1r"]
 
 [ext_resource type="PackedScene" uid="uid://uuxf0u8ck5op" path="res://scenes/Player.tscn" id="1_uwrxv"]
-[ext_resource type="Script" uid="uid://pxl3v7mwpvox" path="res://scripts/player.gd" id="2_yqjtg"]
+[ext_resource type="Script" uid="uid://cga4lhbdmh0qx" path="res://scripts/player.gd" id="2_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://c7kywgd0uuue8" path="res://temporaryAssetsSai/temporaryTextures.png" id="3_iywne"]
 [ext_resource type="Shader" uid="uid://bg8ptbpfrlvla" path="res://scenes/game.gdshader" id="4_iywne"]
 [ext_resource type="Texture2D" uid="uid://ka1lc104dw44" path="res://temporaryAssetsSai/Dungeon Tile Set.png" id="4_p57ef"]
-[ext_resource type="PackedScene" uid="uid://dr14le4dofaa0" path="res://UIElements/main_control.tscn" id="6_u5sy4"]
-[ext_resource type="Script" uid="uid://bsdbi3wghpfxt" path="res://UIElements/skill_bar.gd" id="7_gee14"]
+[ext_resource type="Script" uid="uid://dnbcqvdqlnomf" path="res://scenes/camera_2d.gd" id="7_0tnpc"]
+[ext_resource type="Texture2D" uid="uid://cvvk46e638pc1" path="res://temporaryAssetsSai/UI1.png" id="8_vtaks"]
+[ext_resource type="Texture2D" uid="uid://dgdf1iyyi6pt6" path="res://temporaryAssetsSai/UI2.png" id="9_kvpfn"]
+[ext_resource type="Texture2D" uid="uid://gye6c2xifcwy" path="res://temporaryAssetsSai/UI3.png" id="10_dinhu"]
+[ext_resource type="Script" uid="uid://c60ntngj54jn6" path="res://scenes/slHealthBar.gd" id="11_kvpfn"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yqjtg"]
 
@@ -1844,30 +1847,6 @@ texture = ExtResource("3_iywne")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_0tnpc")
 
-[sub_resource type="GDScript" id="GDScript_0tnpc"]
-script/source = "extends ProgressBar
-
-const MAX_HEALTH: int = 100
-var health: int = 10
-
-func _ready():
-	self.max_value = MAX_HEALTH
-	set_health_bar()
-	
-func _input(event: InputEvent) -> void: # replace this with actual health stuff
-	if event.is_action_pressed(\"ui_down\"):
-		damage()
-		
-func damage(): # replace this once health is finalized
-	health -= 1
-	if health < 0:	
-		health = MAX_HEALTH
-	set_health_bar()
-
-func set_health_bar():
-	self.value = health
-"
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lbhrr"]
 shader = ExtResource("4_iywne")
 shader_parameter/vignette_color = Color(0, 0, 0, 1)
@@ -1900,47 +1879,65 @@ rotation = -0.11763301
 tile_map_data = PackedByteArray("AADM/97/AAABAAEAAADM/9//AAABAAEAAADM/+D/AAABAAEAAADM/+H/AAABAAIAAADN/97/AAABAAEAAADN/9//AAABAAEAAADN/+D/AAABAAEAAADN/+H/AAABAAIAAADO/97/AAABAAEAAADO/9//AAABAAEAAADO/+D/AAABAAEAAADO/+H/AAABAAIAAADP/97/AAABAAEAAADP/9//AAABAAEAAADP/+D/AAABAAEAAADP/+H/AAABAAIAAADQ/97/AAABAAEAAADQ/9//AAABAAEAAADQ/+D/AAABAAEAAADQ/+H/AAABAAIAAADR/97/AAACAAEAAADR/9//AAACAAEAAADR/+D/AAACAAEAAADR/+H/AAACAAIAAADL/97/AAABAAEAAADL/9//AAABAAEAAADL/+D/AAABAAEAAADL/+H/AAABAAIAAADK/97/AAABAAEAAADK/9//AAABAAEAAADK/+D/AAABAAEAAADK/+H/AAABAAIAAADJ/+H/AAAAAAIAAADR/93/AAACAAAAAADK/93/AAABAAAAAADL/93/AAABAAAAAADM/93/AAABAAAAAADN/93/AAABAAAAAADO/93/AAABAAAAAADP/93/AAABAAAAAADQ/93/AAABAAAAAADJ/93/AAAAAAAAAADJ/97/AAAAAAEAAADJ/9//AAAAAAEAAADJ/+D/AAAAAAEAAAA=")
 tile_set = SubResource("TileSet_vtaks")
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=271115718]
-
-[node name="mainControl" parent="UI" unique_id=914664440 instance=ExtResource("6_u5sy4")]
-
-[node name="healthAndSkillBar2" type="VBoxContainer" parent="UI/mainControl" unique_id=1879669244]
-layout_mode = 0
-offset_right = 505.0
-offset_bottom = 469.0
-
-[node name="healthBar" type="ProgressBar" parent="UI/mainControl/healthAndSkillBar2" unique_id=1316896387]
-self_modulate = Color(0.38039216, 1, 1, 0.6666667)
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-show_percentage = false
-script = SubResource("GDScript_0tnpc")
-
-[node name="skillBar" type="ProgressBar" parent="UI/mainControl/healthAndSkillBar2" unique_id=1662316035]
-self_modulate = Color(0.9235445, 0, 0.12920523, 0.6666667)
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-show_percentage = false
-script = ExtResource("7_gee14")
-
 [node name="Player" parent="." unique_id=1108065089 instance=ExtResource("1_uwrxv")]
 position = Vector2(-768, -24)
 script = ExtResource("2_yqjtg")
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1363401495]
 zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+position_smoothing_speed = 2.5
+script = ExtResource("7_0tnpc")
 
 [node name="VignetteArea" type="Area2D" parent="." unique_id=674525417]
 position = Vector2(-8, -61)
 
 [node name="VignetteCollide" type="CollisionShape2D" parent="VignetteArea" unique_id=55043384]
 
-[node name="HUD" type="CanvasLayer" parent="." unique_id=65605135]
+[node name="HUD" type="CanvasLayer" parent="VignetteArea" unique_id=65605135]
+visible = false
 
-[node name="ColorRect" type="ColorRect" parent="HUD" unique_id=1306431936]
+[node name="ColorRect" type="ColorRect" parent="VignetteArea/HUD" unique_id=1306431936]
 material = SubResource("ShaderMaterial_lbhrr")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=271115718]
+
+[node name="Control" type="Control" parent="UI" unique_id=532323620]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 3.0
+offset_top = 65.0
+offset_right = 508.0
+offset_bottom = 65.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Control" unique_id=694347131]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 1
+offset_left = 29.0
+offset_top = -217.0
+offset_right = 1082.0
+offset_bottom = 183.0
+
+[node name="Label" type="Label" parent="UI/Control/HBoxContainer" unique_id=639425792]
+layout_mode = 2
+text = "HEALTH"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UI/Control/HBoxContainer" unique_id=1570347233]
+custom_minimum_size = Vector2(800, 400)
+layout_mode = 2
+nine_patch_stretch = true
+stretch_margin_left = 10
+stretch_margin_top = 10
+stretch_margin_right = 10
+stretch_margin_bottom = 10
+texture_under = ExtResource("8_vtaks")
+texture_over = ExtResource("10_dinhu")
+texture_progress = ExtResource("9_kvpfn")
+tint_progress = Color(0.39826056, 0.9801988, 0.9999997, 1)
+script = ExtResource("11_kvpfn")
