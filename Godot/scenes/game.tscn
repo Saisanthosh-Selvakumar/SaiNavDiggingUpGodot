@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://dkc3bngngt1r"]
 
 [ext_resource type="PackedScene" uid="uid://uuxf0u8ck5op" path="res://scenes/Player.tscn" id="1_uwrxv"]
-[ext_resource type="Script" uid="uid://cga4lhbdmh0qx" path="res://scripts/player.gd" id="2_yqjtg"]
+[ext_resource type="Script" uid="uid://cvq45al3simsc" path="res://scripts/player.gd" id="2_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://c7kywgd0uuue8" path="res://temporaryAssetsSai/temporaryTextures.png" id="3_iywne"]
 [ext_resource type="Shader" uid="uid://bg8ptbpfrlvla" path="res://scenes/game.gdshader" id="4_iywne"]
 [ext_resource type="Texture2D" uid="uid://ka1lc104dw44" path="res://temporaryAssetsSai/Dungeon Tile Set.png" id="4_p57ef"]
@@ -815,6 +815,8 @@ texture = ExtResource("4_p57ef")
 
 [sub_resource type="TileSet" id="TileSet_u5sy4"]
 physics_layer_0/collision_layer = 1
+custom_data_layer_0/name = "spikeDamage"
+custom_data_layer_0/type = 2
 sources/0 = SubResource("TileSetAtlasSource_iywne")
 sources/1 = SubResource("TileSetAtlasSource_p57ef")
 

@@ -5,7 +5,7 @@ const SPEED = 200.0
 const ACCELERATION = 1200.0 
 const FRICTION = 1000.0 
 const JUMP_VELOCITY = -300.0 
-const FALL_THRESHOLD = 100000000
+const FALL_THRESHOLD = 250
 
 # Gravity Variants
 const GRAVITY = 600.0 
@@ -86,9 +86,9 @@ func _physics_process(delta: float) -> void:
 	# --- 5. Apply Movement ---
 	move_and_slide()
 	
-	if is_on_floor() and last_y_velocity < FALL_THRESHOLD:
-		#var impact = 10 #abs(last_y_velocity)
-		Global.damage(10)
+	if is_on_floor() and last_y_velocity > FALL_THRESHOLD:
+		var impact = pow(abs(last_y_velocity), (1/25))
+		Global.damage(impact)
 
 ## Renamed from get_gravity() to avoid conflict with Godot 4.3+ built-in function
 func get_gravity_magnitude() -> float:
