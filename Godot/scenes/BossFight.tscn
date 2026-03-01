@@ -1,50 +1,50 @@
-[gd_scene load_steps=8 format=3 uid="uid://boss_fight"]
+[gd_scene format=3 uid="uid://ba0mku8aoky6j"]
 
-[ext_resource type="Script" path="res://scripts/BossFight.gd" id="1"]
-[ext_resource type="Script" path="res://scripts/Player.gd" id="2"]
-[ext_resource type="Script" path="res://scripts/BossEye.gd" id="3"]
-[ext_resource type="Script" path="res://scripts/Laser.gd" id="4"]
+[ext_resource type="Script" uid="uid://dt3myvtqk2qbh" path="res://scripts/BossFight.gd" id="1"]
+[ext_resource type="Script" uid="uid://drjenlle1i1y0" path="res://scripts/Player.gd" id="2"]
+[ext_resource type="Script" uid="uid://hs4xewpwddsn" path="res://scripts/BossEye.gd" id="3"]
 
-[node name="BossFight" type="Node2D"]
+[node name="BossFight" type="Node2D" unique_id=26894324]
 script = ExtResource("1")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=1432721972]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
 
-[node name="BossEye" type="Node2D" parent="."]
+[node name="BossEye" type="Node2D" parent="." unique_id=242866119]
 position = Vector2(640, 300)
 script = ExtResource("3")
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=650132215]
 position = Vector2(640, 550)
 script = ExtResource("2")
 
-[node name="PlayerCollision" type="CollisionShape2D" parent="Player"]
+[node name="PlayerCollision" type="CollisionShape2D" parent="Player" unique_id=1951375243]
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=70270758]
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=404596267]
 
-[node name="HPBar" type="ProgressBar" parent="HUD"]
-anchors_preset = 0
+[node name="HPBar" type="ProgressBar" parent="HUD" unique_id=119950379]
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 300.0
 offset_bottom = 45.0
 value = 100.0
+metadata/_edit_use_anchors_ = true
 
-[node name="BossHPBar" type="ProgressBar" parent="HUD"]
-anchors_preset = 0
+[node name="BossHPBar" type="ProgressBar" parent="HUD" unique_id=1692290104]
 offset_left = 20.0
 offset_top = 55.0
 offset_right = 300.0
 offset_bottom = 80.0
 value = 100.0
+metadata/_edit_use_anchors_ = true
 
-[node name="GameOverLabel" type="Label" parent="HUD"]
+[node name="GameOverLabel" type="Label" parent="HUD" unique_id=1703208268]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -54,6 +54,6 @@ offset_left = -150.0
 offset_top = -30.0
 offset_right = 150.0
 offset_bottom = 30.0
-text = ""
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
